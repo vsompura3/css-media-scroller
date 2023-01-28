@@ -1,0 +1,133 @@
+:root {
+  --surface1: hsl(210 15% 12%);
+  --text1: hsl(210 15% 90%);
+  --text2: hsl(210 5% 60%);
+}
+
+/* set the default html size to full page */
+html {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+body {
+  min-block-size: 100%;
+  min-inline-size: 100%;
+  box-sizing: border-box;
+  margin: 0;
+
+  background-color: var(--surface1);
+  color: var(--text1);
+
+  display: grid;
+  grid-auto-rows: min-content;
+  place-content: center;
+  gap: 2rem;
+  align-items: start;
+
+  font-family: system-ui, sans-serif;
+}
+
+section {
+  --gap: 2.5rem;
+  display: grid;
+  gap: var(--gap);
+
+  &:first-child {
+    padding-block-start: 2rem;
+  }
+
+  & > header {
+    padding-inline: var(--gap);
+    display: grid;
+    gap: 1ex;
+
+    & > :is(h2, h3) {
+      margin: 0;
+    }
+  }
+}
+
+.horizontal-media-scroller {
+  --size: 10em;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--size);
+  gap: calc(var(--gap) / 2);
+  padding-inline: var(--gap);
+  padding-block-end: var(--gap);
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline-start: var(--gap);
+
+  & > figure {
+    scroll-snap-align: start;
+    display: grid;
+    gap: inherit;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(0.9);
+    }
+
+    & > picture {
+      display: inline-block;
+      inline-size: var(--size);
+      block-size: var(--size);
+      border-radius: 0.5ex;
+      box-shadow: 0 1px 2px 0 hsl(0 0% 0% / 20%);
+      overflow: hidden;
+
+      & > img {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+        background-image: linear-gradient(
+          to bottom,
+          hsl(210 10% 40%),
+          hsl(210 10% 60%)
+        );
+      }
+    }
+
+    & > figcaption {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+  }
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.75px;
+}
+
+h3 {
+  color: var(--text2);
+  font-weight: 400;
+  letter-spacing: 0.75px;
+}
+
+footer {
+  padding-inline-start: 2rem;
+
+  & p > a {
+    display: inline-block;
+    font-style: italic;
+    color: inherit;
+    font-weight: 600;
+  }
+}
